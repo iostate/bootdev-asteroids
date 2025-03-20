@@ -39,10 +39,17 @@ def main():
         # Can call the .update() method for every member of a group by calling it on the group itself
         updatable.update(dt)
         
+        
         for asteroid in asteroids:
-            if asteroid.check_collission(player):
+            if asteroid.collides_with(player):
                 print("Game over!")
                 sys.exit()
+                
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    print("Collission between bullet and asteroid!")
+                    asteroid.kill()
+                    shot.kill()
         
         screen.fill("black")
         
